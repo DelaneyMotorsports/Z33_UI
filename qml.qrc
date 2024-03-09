@@ -1,0 +1,87 @@
+<html>
+ <head></head>
+ <body>
+  <rcc> 
+   <qresource prefix="/assets"> <!-- Images for the Virtual Sky Canopy feature --> 
+    <file>
+     images/clearDay.jpg
+    </file> 
+    <file>
+     images/starryNight.jpg
+    </file> 
+    <file>
+     images/northernLights.jpg
+    </file> 
+    <file>
+     images/rainyClouds.jpg
+    </file> 
+    <file>
+     images/familyPhotos.png
+    </file> <!-- Icons and assets for the Dynamic Drive Mode Selector --> 
+    <file>
+     icons/efficiencyMode.svg
+    </file> 
+    <file>
+     icons/performanceMode.svg
+    </file> 
+    <file>
+     icons/comfortMode.svg
+    </file> 
+    <file>
+     icons/safetyMode.svg
+    </file> <!-- Assets for the Holographic Heads-Up Display feature --> 
+    <file>
+     images/navigationArrow.png
+    </file> 
+    <file>
+     images/safetyAlertIcon.png
+    </file> <!-- Sounds for the Dynamic Acoustic Environment feature --> 
+    <file>
+     sounds/forestBirds.mp3
+    </file> 
+    <file>
+     sounds/oceanWaves.mp3
+    </file> 
+    <file>
+     sounds/cityPulse.mp3
+    </file> <!-- Additional assets for the Ambient Wellness Monitor --> 
+    <file>
+     images/wellnessBackground.jpg
+    </file> 
+    <file>
+     sounds/relaxingAmbiance.mp3
+    </file> <!-- QML files for each feature component --> 
+    <file>
+     qml/FeatureXDisplay.qml
+    </file> 
+    <file>
+     qml/AromaInfusionSystem.qml
+    </file> 
+    <file>
+     qml/VirtualSkyCanopy.qml
+    </file> 
+    <file>
+     qml/SensoryClimateControl.qml
+    </file> 
+    <file>
+     qml/DynamicDriveModeSelector.qml
+    </file> 
+    <file>
+     qml/StellarSkyRoof.qml
+    </file> 
+    <file>
+     qml/SeamlessJourneyPlanner.qml
+    </file> 
+    <file>
+     qml/HolographicHeadsUpDisplay.qml
+    </file> 
+    <file>
+     qml/DynamicAcousticEnvironment.qml
+    </file> 
+    <file>
+     qml/AmbientWellnessMonitor.qml
+    </file> <!-- Add all other QML component files as needed --> 
+   </qresource> 
+  </rcc>
+ </body>
+</html>
