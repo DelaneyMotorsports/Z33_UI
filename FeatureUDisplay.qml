@@ -1,5 +1,5 @@
 /*!
-    @file    FeatureXDisplay.qml
+    @file    FeatureUDisplay.qml
     @brief   Stellar Sky Roof for an immersive celestial experience inside your vehicle.
 
     The Stellar Sky Roof feature redefines the concept of vehicle luxury, offering passengers
