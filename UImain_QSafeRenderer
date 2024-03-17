@@ -1,0 +1,48 @@
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include "CarInterface.h"
+// Include Qt Safe Renderer headers
+#include <QSafeRenderer>
+
+/*!
+ * Main entry point for the Z33 Luxury Vehicle UI application, incorporating
+ * Qt Safe Renderer for safety-critical UI elements.
+ * 
+ * this file should be renamed to main.cpp and only has the QT safe renderer in it.
+ * see what else this is missing compared to original main.cpp
+ *
+ * The application is designed to meet rigorous safety standards, ensuring
+ * critical information is reliably displayed to the driver at all times.
+ * This integration showcases how the Qt Safe Renderer works in tandem with
+ * the main UI to enhance safety without compromising on design.
+ * 
+ * @author Kevin Delaney
+ * @contact Kevin@DelaneyMotorsports.com
+ * @date 2024-03-15
+ */
+int main(int argc, char *argv[])
+{
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication app(argc, argv);
+
+    // Initialize Qt Safe Renderer before launching the main application
+    QSafeRenderer safeRenderer;
+    safeRenderer.initialize("/path/to/safeUI.qml"); // Specify the path to your Safe Renderer UI definition
+
+    QQmlApplicationEngine engine;
+
+    // Setup and expose CarInterface to QML
+    DelaneyMotorsports::CarInterfaceImpl carInterface;
+    engine.rootContext()->setContextProperty("carInterface", &carInterface);
+
+    // Load the main application UI
+    const QUrl mainUrl(QStringLiteral("qrc:/main.qml"));
+    engine.load(mainUrl);
+
+    // Ensure the application exits cleanly if the main UI fails to load
+    if (engine.rootObjects().isEmpty())
+        return -1;
+
+    return app.exec();
+}
