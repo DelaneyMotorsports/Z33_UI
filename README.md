@@ -4,7 +4,7 @@
 
 Welcome to the Z33 Luxury Vehicle UI Project, an innovative approach to in-car entertainment and information systems. Designed for luxury vehicles and high-end custom aftermarket installations, this project leverages Qt Quick and QML to create a user interface that is both visually stunning and functionally advanced.
 
-Inspired by the legendary Bosch Motorsports DDU11 professional data display, this system combines race-proven telemetry visualization with the refined aesthetics expected in modern luxury vehicles like the 2026 Range Rover.
+Inspired by the legendary Bosch Motorsports DDU11 professional data display, this system combines race-proven telemetry visualization with refined aesthetics for modern luxury vehicle applications.
 
 ## Features
 
@@ -38,7 +38,7 @@ This system is designed to run on readily available, powerful embedded computing
 
 ### Display Requirements
 
-For optimal visual quality comparable to 2026-era luxury vehicles (Range Rover, Mercedes-Benz, BMW):
+For optimal visual quality in modern luxury vehicle installations:
 
 - **Resolution**: 1920x1080 (1080p) minimum, 2K/4K capable
 - **Display Technology**: AMOLED or OLED preferred for deep blacks and vibrant colors
@@ -73,7 +73,7 @@ We welcome contributions to the Z33 Luxury Vehicle UI Project! If you're interes
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the GNU Affero General Public License v3.0 (AGPLv3) - see the LICENSE file for details.
 
 ## Acknowledgments
 
