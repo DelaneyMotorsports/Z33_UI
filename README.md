@@ -1,10 +1,10 @@
 # Z33 Luxury Vehicle UI Project
 
-**Bosch Motorsports DDU11-Inspired Design**
+**Professional Motorsports Digital Dashboard**
 
 Welcome to the Z33 Luxury Vehicle UI Project, an innovative approach to in-car entertainment and information systems. Designed for luxury vehicles and high-end custom aftermarket installations, this project leverages Qt Quick and QML to create a user interface that is both visually stunning and functionally advanced.
 
-Inspired by the legendary Bosch Motorsports DDU11 professional data display, this system combines race-proven telemetry visualization with refined aesthetics for modern luxury vehicle applications.
+This system combines professional motorsports telemetry visualization with refined aesthetics for modern luxury vehicle applications.
 
 ## Features
 
