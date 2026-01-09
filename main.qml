@@ -1,13 +1,10 @@
 /*!
     @file    main.qml
-    @brief   Delaney Motorsports digital dashboard for motorsports and luxury vehicles.
+    @brief   Delaney Motorsports professional motorsports dashboard
 
     This QML file defines the main display interface for professional motorsports applications.
-    Features a professional layout with shift lights, large central display, and peripheral
-    data fields for comprehensive vehicle telemetry monitoring.
-
-    The design emphasizes instant readability, high contrast, and professional aesthetics
-    suitable for both track and street applications.
+    Features a race-focused layout optimized for instant readability at high speeds with
+    large central RPM display, shift light bar, and peripheral telemetry data.
 
     @author  Kevin Delaney
     @date    January 8, 2026
@@ -28,68 +25,66 @@ ApplicationWindow {
     color: "#000000"
 
     // Simulated data (replace with CarInterface when available)
-    property double currentSpeed: 87
     property double currentRPM: 4500
     property double maxRPM: 8000
+    property double currentSpeed: 87
+    property int currentGear: 4
     property double oilPressure: 45
-    property double oilTemp: 195
+    property double oilTemp: 210
     property double waterTemp: 185
     property double voltage: 13.8
     property double fuelLevel: 67
     property double lapTime: 92.456
     property double bestLap: 89.234
+    property double boost: 8.5
 
     Rectangle {
         anchors.fill: parent
         color: "#000000"
 
-        // Main Dashboard Layout
         ColumnLayout {
             anchors.fill: parent
-            anchors.margins: 20
-            spacing: 15
+            anchors.margins: 0
+            spacing: 0
 
-            // ========== SHIFT LIGHT BAR (Top) ==========
+            // ========== SHIFT LIGHT BAR ==========
             Rectangle {
                 Layout.fillWidth: true
-                Layout.preferredHeight: 80
-                color: "#0a0a0a"
-                border.color: "#333333"
-                border.width: 2
-                radius: 5
+                Layout.preferredHeight: 100
+                color: "#000000"
 
                 Row {
                     anchors.centerIn: parent
-                    spacing: 15
+                    spacing: 12
 
                     Repeater {
-                        model: 12
+                        model: 14
 
                         Rectangle {
-                            width: 140
-                            height: 60
-                            radius: 8
+                            width: 120
+                            height: 80
+                            radius: 6
 
-                            property double threshold: (index + 1) / 12.0
+                            property double threshold: (index + 1) / 14.0
                             property bool isActive: (currentRPM / maxRPM) >= threshold
 
                             color: {
-                                if (!isActive) return "#1a1a1a"
-                                if (index < 6) return "#00ff00"      // Green (low RPM)
-                                if (index < 9) return "#ffff00"      // Yellow (medium RPM)
-                                if (index < 11) return "#ff8800"     // Orange (high RPM)
-                                return "#ff0000"                      // Red (shift point)
+                                if (!isActive) return "#0d0d0d"
+                                if (index < 7) return "#00ff00"      // Green
+                                if (index < 10) return "#ffff00"     // Yellow
+                                if (index < 12) return "#ff6600"     // Orange
+                                return "#ff0000"                      // Red
                             }
 
-                            border.color: isActive ? "#ffffff" : "#333333"
+                            border.color: isActive ? "#ffffff" : "#222222"
                             border.width: isActive ? 3 : 1
 
-                            // Flashing effect at max RPM
+                            // Flashing at redline
                             SequentialAnimation on opacity {
-                                running: index >= 11 && isActive
+                                running: index >= 12 && isActive
                                 loops: Animation.Infinite
-                                NumberAnimation { to: 0.3; duration: 200 }
-                                NumberAnimation { to: 1.0; duration: 200 }
+                                NumberAnimation { to: 0.2; duration: 150 }
+                                NumberAnimation { to: 1.0; duration: 150 }
                             }
                         }
                     }
@@ -100,45 +95,81 @@ ApplicationWindow {
             Rectangle {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                color: "#0a0a0a"
-                border.color: "#333333"
-                border.width: 2
-                radius: 5
+                color: "#000000"
 
-                // Grid layout for data fields
-                GridLayout {
-                    anchors.fill: parent
-                    anchors.margins: 20
-                    columns: 3
-                    rows: 2
-                    columnSpacing: 20
-                    rowSpacing: 20
+                // Top row data fields
+                Row {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.top: parent.top
+                    anchors.topMargin: 20
+                    spacing: 40
 
-                    // ===== TOP LEFT: Oil Pressure =====
+                    // Boost
                     Rectangle {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        color: "#151515"
-                        border.color: "#444444"
+                        width: 280
+                        height: 140
+                        color: "#0a0a0a"
+                        border.color: "#333333"
                         border.width: 2
-                        radius: 8
+                        radius: 6
 
                         Column {
                             anchors.centerIn: parent
-                            spacing: 10
+                            spacing: 8
 
                             Text {
-                                text: "OIL PSI"
-                                font.pixelSize: 32
+                                text: "BOOST"
+                                font.pixelSize: 26
                                 font.family: "Roboto"
                                 font.bold: true
-                                color: "#888888"
+                                color: "#666666"
                                 anchors.horizontalCenter: parent.horizontalCenter
                             }
 
                             Text {
-                                text: oilPressure.toFixed(1)
-                                font.pixelSize: 120
+                                text: boost.toFixed(1)
+                                font.pixelSize: 70
+                                font.family: "Roboto"
+                                font.bold: true
+                                color: boost > 15 ? "#ff0000" : "#00ff00"
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+
+                            Text {
+                                text: "PSI"
+                                font.pixelSize: 22
+                                font.family: "Roboto"
+                                color: "#666666"
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+                        }
+                    }
+
+                    // Oil Pressure
+                    Rectangle {
+                        width: 280
+                        height: 140
+                        color: "#0a0a0a"
+                        border.color: "#333333"
+                        border.width: 2
+                        radius: 6
+
+                        Column {
+                            anchors.centerIn: parent
+                            spacing: 8
+
+                            Text {
+                                text: "OIL PSI"
+                                font.pixelSize: 26
+                                font.family: "Roboto"
+                                font.bold: true
+                                color: "#666666"
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+
+                            Text {
+                                text: oilPressure.toFixed(0)
+                                font.pixelSize: 70
                                 font.family: "Roboto"
                                 font.bold: true
                                 color: oilPressure < 20 ? "#ff0000" : "#00ff00"
@@ -147,14 +178,174 @@ ApplicationWindow {
                         }
                     }
 
-                    // ===== CENTER: MAIN SPEED DISPLAY =====
+                    // Oil Temp
                     Rectangle {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        color: "#151515"
+                        width: 280
+                        height: 140
+                        color: "#0a0a0a"
+                        border.color: "#333333"
+                        border.width: 2
+                        radius: 6
+
+                        Column {
+                            anchors.centerIn: parent
+                            spacing: 8
+
+                            Text {
+                                text: "OIL TEMP"
+                                font.pixelSize: 26
+                                font.family: "Roboto"
+                                font.bold: true
+                                color: "#666666"
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+
+                            Text {
+                                text: Math.round(oilTemp).toString()
+                                font.pixelSize: 70
+                                font.family: "Roboto"
+                                font.bold: true
+                                color: oilTemp > 240 ? "#ff0000" : "#00ff00"
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+
+                            Text {
+                                text: "°F"
+                                font.pixelSize: 22
+                                font.family: "Roboto"
+                                color: "#666666"
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+                        }
+                    }
+
+                    // Water Temp
+                    Rectangle {
+                        width: 280
+                        height: 140
+                        color: "#0a0a0a"
+                        border.color: "#333333"
+                        border.width: 2
+                        radius: 6
+
+                        Column {
+                            anchors.centerIn: parent
+                            spacing: 8
+
+                            Text {
+                                text: "WATER"
+                                font.pixelSize: 26
+                                font.family: "Roboto"
+                                font.bold: true
+                                color: "#666666"
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+
+                            Text {
+                                text: Math.round(waterTemp).toString()
+                                font.pixelSize: 70
+                                font.family: "Roboto"
+                                font.bold: true
+                                color: waterTemp > 220 ? "#ff0000" : "#00ccff"
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+
+                            Text {
+                                text: "°F"
+                                font.pixelSize: 22
+                                font.family: "Roboto"
+                                color: "#666666"
+                                anchors.horizontalCenter: parent.horizontalCenter
+                            }
+                        }
+                    }
+                }
+
+                // Center: MASSIVE RPM display
+                Rectangle {
+                    anchors.centerIn: parent
+                    anchors.verticalCenterOffset: 50
+                    width: 800
+                    height: 400
+                    color: "transparent"
+
+                    Column {
+                        anchors.centerIn: parent
+                        spacing: 0
+
+                        Text {
+                            text: Math.round(currentRPM).toString()
+                            font.pixelSize: 350
+                            font.family: "Roboto"
+                            font.bold: true
+                            color: {
+                                if (currentRPM > maxRPM * 0.9) return "#ff0000"
+                                if (currentRPM > maxRPM * 0.8) return "#ff6600"
+                                if (currentRPM > maxRPM * 0.7) return "#ffff00"
+                                return "#00ff00"
+                            }
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            style: Text.Outline
+                            styleColor: "#000000"
+                        }
+
+                        Text {
+                            text: "RPM"
+                            font.pixelSize: 48
+                            font.family: "Roboto"
+                            font.bold: true
+                            color: "#666666"
+                            anchors.horizontalCenter: parent.horizontalCenter
+                        }
+                    }
+                }
+
+                // Left side: Gear and Speed
+                Column {
+                    anchors.left: parent.left
+                    anchors.leftMargin: 120
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenterOffset: 50
+                    spacing: 40
+
+                    // Gear
+                    Rectangle {
+                        width: 200
+                        height: 200
+                        color: "#0a0a0a"
                         border.color: "#00ff00"
                         border.width: 4
-                        radius: 8
+                        radius: 10
+
+                        Text {
+                            text: currentGear.toString()
+                            font.pixelSize: 140
+                            font.family: "Roboto"
+                            font.bold: true
+                            color: "#00ff00"
+                            anchors.centerIn: parent
+                        }
+
+                        Text {
+                            text: "GEAR"
+                            font.pixelSize: 20
+                            font.family: "Roboto"
+                            font.bold: true
+                            color: "#00ff00"
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            anchors.bottom: parent.bottom
+                            anchors.bottomMargin: 15
+                        }
+                    }
+
+                    // Speed
+                    Rectangle {
+                        width: 200
+                        height: 180
+                        color: "#0a0a0a"
+                        border.color: "#333333"
+                        border.width: 2
+                        radius: 6
 
                         Column {
                             anchors.centerIn: parent
@@ -162,213 +353,163 @@ ApplicationWindow {
 
                             Text {
                                 text: "SPEED"
-                                font.pixelSize: 42
+                                font.pixelSize: 22
                                 font.family: "Roboto"
                                 font.bold: true
-                                color: "#00ff00"
+                                color: "#666666"
                                 anchors.horizontalCenter: parent.horizontalCenter
                             }
 
                             Text {
                                 text: Math.round(currentSpeed).toString()
-                                font.pixelSize: 280
+                                font.pixelSize: 90
                                 font.family: "Roboto"
                                 font.bold: true
-                                color: "#00ff00"
+                                color: "#ffffff"
                                 anchors.horizontalCenter: parent.horizontalCenter
                             }
 
                             Text {
                                 text: "MPH"
-                                font.pixelSize: 42
+                                font.pixelSize: 20
                                 font.family: "Roboto"
-                                font.bold: true
-                                color: "#888888"
+                                color: "#666666"
                                 anchors.horizontalCenter: parent.horizontalCenter
                             }
                         }
                     }
+                }
 
-                    // ===== TOP RIGHT: RPM =====
+                // Right side: Lap times and other data
+                Column {
+                    anchors.right: parent.right
+                    anchors.rightMargin: 120
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.verticalCenterOffset: 50
+                    spacing: 40
+
+                    // Current Lap
                     Rectangle {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        color: "#151515"
-                        border.color: "#444444"
+                        width: 320
+                        height: 120
+                        color: "#0a0a0a"
+                        border.color: "#333333"
                         border.width: 2
-                        radius: 8
+                        radius: 6
 
-                        Column {
-                            anchors.centerIn: parent
-                            spacing: 10
-
-                            Text {
-                                text: "RPM"
-                                font.pixelSize: 32
-                                font.family: "Roboto"
-                                font.bold: true
-                                color: "#888888"
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-
-                            Text {
-                                text: Math.round(currentRPM).toString()
-                                font.pixelSize: 120
-                                font.family: "Roboto"
-                                font.bold: true
-                                color: {
-                                    if (currentRPM > maxRPM * 0.85) return "#ff0000"
-                                    if (currentRPM > maxRPM * 0.70) return "#ffff00"
-                                    return "#00ff00"
-                                }
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-                        }
-                    }
-
-                    // ===== BOTTOM LEFT: Water Temp =====
-                    Rectangle {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        color: "#151515"
-                        border.color: "#444444"
-                        border.width: 2
-                        radius: 8
-
-                        Column {
-                            anchors.centerIn: parent
-                            spacing: 10
-
-                            Text {
-                                text: "WATER °F"
-                                font.pixelSize: 32
-                                font.family: "Roboto"
-                                font.bold: true
-                                color: "#888888"
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-
-                            Text {
-                                text: Math.round(waterTemp).toString()
-                                font.pixelSize: 120
-                                font.family: "Roboto"
-                                font.bold: true
-                                color: waterTemp > 220 ? "#ff0000" : "#00ccff"
-                                anchors.horizontalCenter: parent.horizontalCenter
-                            }
-                        }
-                    }
-
-                    // ===== BOTTOM CENTER: Lap Timer =====
-                    Rectangle {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        color: "#151515"
-                        border.color: "#444444"
-                        border.width: 2
-                        radius: 8
-
-                        Column {
+                        Row {
                             anchors.centerIn: parent
                             spacing: 15
 
-                            // Current Lap
-                            Row {
-                                spacing: 15
-                                anchors.horizontalCenter: parent.horizontalCenter
-
-                                Text {
-                                    text: "LAP:"
-                                    font.pixelSize: 38
-                                    font.family: "Roboto"
-                                    font.bold: true
-                                    color: "#888888"
-                                }
-
-                                Text {
-                                    text: formatLapTime(lapTime)
-                                    font.pixelSize: 48
-                                    font.family: "Roboto Mono"
-                                    font.bold: true
-                                    color: "#ffffff"
-                                }
+                            Text {
+                                text: "LAP"
+                                font.pixelSize: 28
+                                font.family: "Roboto"
+                                font.bold: true
+                                color: "#666666"
                             }
 
-                            // Best Lap
-                            Row {
-                                spacing: 15
-                                anchors.horizontalCenter: parent.horizontalCenter
-
-                                Text {
-                                    text: "BEST:"
-                                    font.pixelSize: 38
-                                    font.family: "Roboto"
-                                    font.bold: true
-                                    color: "#888888"
-                                }
-
-                                Text {
-                                    text: formatLapTime(bestLap)
-                                    font.pixelSize: 48
-                                    font.family: "Roboto Mono"
-                                    font.bold: true
-                                    color: "#00ff00"
-                                }
+                            Text {
+                                text: formatLapTime(lapTime)
+                                font.pixelSize: 48
+                                font.family: "Roboto Mono"
+                                font.bold: true
+                                color: "#ffffff"
                             }
                         }
                     }
 
-                    // ===== BOTTOM RIGHT: Voltage & Fuel =====
+                    // Best Lap
                     Rectangle {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        color: "#151515"
-                        border.color: "#444444"
+                        width: 320
+                        height: 120
+                        color: "#0a0a0a"
+                        border.color: "#00ff00"
                         border.width: 2
-                        radius: 8
+                        radius: 6
 
-                        Column {
+                        Row {
                             anchors.centerIn: parent
-                            spacing: 25
+                            spacing: 15
 
-                            // Voltage
-                            Row {
-                                spacing: 15
-                                anchors.horizontalCenter: parent.horizontalCenter
+                            Text {
+                                text: "BEST"
+                                font.pixelSize: 28
+                                font.family: "Roboto"
+                                font.bold: true
+                                color: "#00ff00"
+                            }
+
+                            Text {
+                                text: formatLapTime(bestLap)
+                                font.pixelSize: 48
+                                font.family: "Roboto Mono"
+                                font.bold: true
+                                color: "#00ff00"
+                            }
+                        }
+                    }
+
+                    // Voltage and Fuel
+                    Row {
+                        spacing: 20
+
+                        Rectangle {
+                            width: 150
+                            height: 100
+                            color: "#0a0a0a"
+                            border.color: "#333333"
+                            border.width: 2
+                            radius: 6
+
+                            Column {
+                                anchors.centerIn: parent
+                                spacing: 5
 
                                 Text {
-                                    text: "VOLTS:"
-                                    font.pixelSize: 38
+                                    text: "VOLTS"
+                                    font.pixelSize: 18
                                     font.family: "Roboto"
                                     font.bold: true
-                                    color: "#888888"
+                                    color: "#666666"
+                                    anchors.horizontalCenter: parent.horizontalCenter
                                 }
 
                                 Text {
                                     text: voltage.toFixed(1)
-                                    font.pixelSize: 52
+                                    font.pixelSize: 42
                                     font.family: "Roboto"
                                     font.bold: true
                                     color: voltage < 12.5 ? "#ff8800" : "#00ff00"
+                                    anchors.horizontalCenter: parent.horizontalCenter
                                 }
                             }
+                        }
 
-                            // Fuel Level
-                            Row {
-                                spacing: 15
-                                anchors.horizontalCenter: parent.horizontalCenter
+                        Rectangle {
+                            width: 150
+                            height: 100
+                            color: "#0a0a0a"
+                            border.color: "#333333"
+                            border.width: 2
+                            radius: 6
+
+                            Column {
+                                anchors.centerIn: parent
+                                spacing: 5
 
                                 Text {
-                                    text: "FUEL:"
-                                    font.pixelSize: 38
+                                    text: "FUEL"
+                                    font.pixelSize: 18
                                     font.family: "Roboto"
                                     font.bold: true
-                                    color: "#888888"
+                                    color: "#666666"
+                                    anchors.horizontalCenter: parent.horizontalCenter
                                 }
 
                                 Text {
                                     text: Math.round(fuelLevel) + "%"
-                                    font.pixelSize: 52
+                                    font.pixelSize: 42
                                     font.family: "Roboto"
                                     font.bold: true
                                     color: {
@@ -376,6 +517,7 @@ ApplicationWindow {
                                         if (fuelLevel < 30) return "#ffff00"
                                         return "#00ff00"
                                     }
+                                    anchors.horizontalCenter: parent.horizontalCenter
                                 }
                             }
                         }
@@ -402,9 +544,14 @@ ApplicationWindow {
             currentRPM = 3000 + Math.sin(Date.now() / 1000) * 2500 + 2500
             // Simulate varying speed
             currentSpeed = 60 + Math.sin(Date.now() / 800) * 40 + 40
+            // Simulate boost
+            boost = 5 + Math.sin(Date.now() / 600) * 6 + 6
             // Simulate lap timer
             lapTime += 0.1
             if (lapTime > 120) lapTime = 0
+            // Simulate gear changes
+            if (currentRPM > 7000) currentGear = Math.min(6, currentGear + 1)
+            if (currentRPM < 3000) currentGear = Math.max(1, currentGear - 1)
         }
     }
 }
