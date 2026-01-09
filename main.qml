@@ -1,10 +1,10 @@
 /*!
     @file    main.qml
-    @brief   DDU11-inspired digital dashboard for motorsports and luxury vehicles.
+    @brief   Delaney Motorsports digital dashboard for motorsports and luxury vehicles.
 
-    This QML file defines the main display interface inspired by the Bosch Motorsports DDU11.
-    Features a professional motorsports layout with shift lights, large central display,
-    and peripheral data fields for comprehensive vehicle telemetry monitoring.
+    This QML file defines the main display interface for professional motorsports applications.
+    Features a professional layout with shift lights, large central display, and peripheral
+    data fields for comprehensive vehicle telemetry monitoring.
 
     The design emphasizes instant readability, high contrast, and professional aesthetics
     suitable for both track and street applications.
@@ -24,7 +24,7 @@ ApplicationWindow {
     visible: true
     width: 1920
     height: 1080
-    title: "Delaney Motorsports DDU11"
+    title: "Delaney Motorsports Dashboard"
     color: "#000000"
 
     // Simulated data (replace with CarInterface when available)
@@ -43,7 +43,7 @@ ApplicationWindow {
         anchors.fill: parent
         color: "#000000"
 
-        // Main DDU11 Layout
+        // Main Dashboard Layout
         ColumnLayout {
             anchors.fill: parent
             anchors.margins: 20
