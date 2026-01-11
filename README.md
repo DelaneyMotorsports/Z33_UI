@@ -1,6 +1,10 @@
 # Z33 Luxury Vehicle UI Project
 
+**Professional Motorsports Digital Dashboard**
+
 Welcome to the Z33 Luxury Vehicle UI Project, an innovative approach to in-car entertainment and information systems. Designed for luxury vehicles and high-end custom aftermarket installations, this project leverages Qt Quick and QML to create a user interface that is both visually stunning and functionally advanced.
+
+This system combines professional motorsports telemetry visualization with refined aesthetics for modern luxury vehicle applications.
 
 ## Features
 
@@ -13,6 +17,41 @@ This project includes several bespoke features tailored to enhance the driving e
 - **Virtual Sky Canopy**: Offers customizable sky scenes on the vehicle's roof, creating a unique ambiance.
 - **Sensory Climate Control**: Dynamically adjusts the cabin's climate, including temperature, scent, and humidity, for optimal comfort.
 - **Dynamic Drive Mode Selector**: Automatically adjusts the vehicle's driving dynamics according to the driver's behavior and road conditions.
+
+## Hardware Platforms
+
+This system is designed to run on readily available, powerful embedded computing platforms suitable for automotive installations:
+
+### Supported Hardware
+
+- **Raspberry Pi 5** (4GB/8GB RAM recommended)
+  - ARM Cortex-A76 quad-core processor @ 2.4GHz
+  - Support for dual 4K HDMI displays
+  - GPIO for sensor integration
+  - Excellent price-to-performance ratio
+
+- **NVIDIA Jetson Developer Kits** (Jetson Nano, Xavier NX, Orin Nano)
+  - Hardware-accelerated GPU rendering
+  - Superior graphics performance for complex UI elements
+  - AI/ML capabilities for future enhancements
+  - Industrial-grade reliability for automotive environments
+
+### Display Requirements
+
+For optimal visual quality in modern luxury vehicle installations:
+
+- **Resolution**: 1920x1080 (1080p) minimum, 2K/4K capable
+- **Display Technology**: AMOLED or OLED preferred for deep blacks and vibrant colors
+- **Brightness**: 500+ nits for daylight visibility
+- **Touch Capability**: Capacitive multi-touch recommended
+- **Aspect Ratio**: 16:9 or 21:9 widescreen formats
+
+**Recommended Display Options**:
+- Waveshare 10.1" 1920x1200 IPS DSI Display
+- Official Raspberry Pi Touch Display (7" for compact builds)
+- Custom HDMI OLED panels (available from automotive display suppliers)
+
+For detailed hardware setup instructions, see [HARDWARE_SETUP.md](HARDWARE_SETUP.md).
 
 ## Installation
 
@@ -34,7 +73,7 @@ We welcome contributions to the Z33 Luxury Vehicle UI Project! If you're interes
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the GNU Affero General Public License v3.0 (AGPLv3) - see the LICENSE file for details.
 
 ## Acknowledgments
 
